@@ -1,0 +1,77 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="header">
+          <h4 class="title">{{::vm.ui.title}}</h4>
+        </div>
+        <div class="content">
+          <form role="form" ng-submit="vm.onSave()" name="personForm">
+            <div class="row">
+              <div class="col-md-4">
+              <!-- Photo Block -->
+                <fieldset>
+                  <div class="form-group">
+                    <div class="col-md-12">
+                      <label class="control-label" for="file">Photo</label>
+                      <div>
+                        <div ng-if="vm._isEditing && vm.person.photo">
+                          <img width="100%" ng-src="uploads/celebrity/{{::vm.person.photo}}" style="cursor: pointer" ng-click="vm.onChangePic()">
+                        </div>
+                        <div ng-if="!vm.person.photo || !vm._isEditing" class="_mt-1">                
+                          <div class="tab-content img-selector">
+                            <input type="file" ngf-select ng-model="vm.picFile" name="file"    
+                                 accept="image/*" ngf-max-size="2MB"
+                                 ngf-model-invalid="vm.errorFile">
+                            <i ng-show="personForm.file.$error.maxSize">File too large 
+                              {{vm.errorFile.size / 1000000|number:1}}MB: max 2M</i>
+                            <img ng-show="personForm.file.$valid" ngf-thumbnail="vm.picFile" class="_mt-2 img-preview">
+                            <a href="" class="btn btn-danger close-btn" ng-click="vm.cancelPicSelection()" ng-show="vm.picFile || (vm._isEditing && vm._tmpPersonImg)">
+                              <i class="fa fa-close"></i>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+
+              <div class="col-md-8">
+              <!-- Content Block -->
+                <fieldset>
+                  <div class="form-group">
+                    <label class="control-label" for="name">Name *</label>
+                    <input type="text" name="name" class="form-control" ng-model="vm.person.name" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="bio">Bio *</label>
+                    <textarea rows="4" name="body" class="form-control input-transparent" ng-model="vm.person.bio" required></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="category">Category *</label>
+                    <ui-select multiple tagging tagging-label="false" ng-model="vm.person.category_ids" title="Set Categories">
+                      <ui-select-match>{{$item.title}}</ui-select-match>
+                      <ui-select-choices repeat="category.id as category in vm.ui.arr_categories | filter:$select.search">
+                        {{category.title}}
+                      </ui-select-choices>
+                    </ui-select>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <div class="row">
+                <div class="col-md-12 text-right">
+                  <button type="submit" class="btn btn-primary btn-fill">Save</button>
+                  <button type="button" class="btn btn-default btn-fill" ng-click="vm.onCancel()">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="box-2 v2 wow fadeInUp" ng-hide="::vm.genre_id">
+  <h2 class="txt_cntr marTop7 color1">Browse By Book Categories</h2>        
+  <div class="row">
+    <div class="col-sm-4 col-md-3 col-lg-2" ng-repeat="genre in vm.arr_genres">
+      <div class="category-wrapper txt_cntr">
+        <p class="txt6"><a ui-sref="main.books({genre_id: genre.id})" class="link3">{{genre.title}}</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2 class="txt_cntr marTop1" ng-show="::vm.genre_id">
+  Books in {{vm.genre.title}} category
+  <!-- <a ui-sref="main.celebrities({category_id: null})" ui-sref-opts="{reload: true}" class="pull-left">Back</a> -->
+</h2>
+<div class="container marTop2">
+  <div class="row txt_cntr">
+    <div class="col-sm-6 col-md-3" ng-repeat="book in vm.arr_books">
+      <div class="book-wrapper">
+        <a ui-sref="main.book({book_id: book.id})">
+          <img src="uploads/book/{{book.cover}}">
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

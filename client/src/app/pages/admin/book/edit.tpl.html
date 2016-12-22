@@ -1,0 +1,90 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="header">
+          <h4 class="title">{{::vm.ui.title}}</h4>
+        </div>
+        <div class="content">
+          <form role="form" ng-submit="vm.onSave()" name="bookForm">
+            <div class="row">
+              <div class="col-md-4">
+              <!-- Cover Block -->
+                <fieldset>
+                  <div class="form-group">
+                    <div class="col-md-12">
+                      <label class="control-label" for="file">Cover</label>
+                      <div>
+                        <div ng-if="vm._isEditing && vm.book.cover">
+                          <img width="100%" ng-src="uploads/book/{{::vm.book.cover}}" style="cursor: pointer" ng-click="vm.onChangePic()">
+                        </div>
+                        <div ng-if="!vm.book.cover || !vm._isEditing" class="_mt-1">                
+                          <div class="tab-content img-selector">
+                            <input type="file" ngf-select ng-model="vm.picFile" name="file"    
+                                 accept="image/*" ngf-max-size="2MB"
+                                 ngf-model-invalid="vm.errorFile">
+                            <i ng-show="bookForm.file.$error.maxSize">File too large 
+                              {{vm.errorFile.size / 1000000|number:1}}MB: max 2M</i>
+                            <img ng-show="bookForm.file.$valid" ngf-thumbnail="vm.picFile" class="_mt-2 img-preview">
+                            <a href="" class="btn btn-danger close-btn" ng-click="vm.cancelPicSelection()" ng-show="vm.picFile || (vm._isEditing && vm._tmpCoverImg)">
+                              <i class="fa fa-close"></i>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+
+              <div class="col-md-8">
+              <!-- Content Block -->
+                <fieldset>
+                  <div class="form-group">
+                    <label class="control-label" for="title">Title *</label>
+                    <input type="text" name="title" class="form-control" ng-model="vm.book.title" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="author">Author *</label>
+                    <input type="text" name="author" class="form-control" ng-model="vm.book.author" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="summary">Summary *</label>
+                    <textarea rows="4" name="summary" class="form-control input-transparent" ng-model="vm.book.summary" required></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="isbn">ISBN</label>
+                    <input type="text" name="isbn" class="form-control" ng-model="vm.book.isbn">
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="amazon">Buy Link(Amazon)</label>
+                    <input type="url" name="amazon" class="form-control" ng-model="vm.book.amazon">
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label" for="genre">Genre *</label>
+                    <ui-select multiple tagging tagging-label="false" ng-model="vm.book.genre_ids" title="Set Genres">
+                      <ui-select-match>{{$item.title}}</ui-select-match>
+                      <ui-select-choices repeat="genre.id as genre in vm.ui.arr_genres | filter:$select.search">
+                        {{genre.title}}
+                      </ui-select-choices>
+                    </ui-select>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <div class="row">
+                <div class="col-md-12 text-right">
+                  <button type="submit" class="btn btn-primary btn-fill">Save</button>
+                  <button type="button" class="btn btn-default btn-fill" ng-click="vm.onCancel()">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

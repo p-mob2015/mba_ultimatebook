@@ -1,0 +1,45 @@
+<div class="row topping" ng-cloak>
+  <div class="col-md-6">
+    <div class="breadcrumber">
+      <a class="link-main txt1" ui-sref="main.books({genre_id: genre.id})" ng-repeat="genre in vm.book.genres">{{genre.title}}</a>
+    </div>
+  </div>
+  <div class="col-md-6 txt_right">
+    <ul class="share-buttons">
+      <li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fbookshelf.com&t=" title="Share on Facebook" target="_blank"><img alt="Share on Facebook" src="assets/img/flat_web_icon_set/black/Facebook.png"></a></li>
+      <li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fbookshelf.com&text=:%20http%3A%2F%2Fbookshelf.com" target="_blank" title="Tweet"><img alt="Tweet" src="assets/img/flat_web_icon_set/black/Twitter.png"></a></li>
+      <li><a href="https://plus.google.com/share?url=http%3A%2F%2Fbookshelf.com" target="_blank" title="Share on Google+"><img alt="Share on Google+" src="assets/img/flat_web_icon_set/black/Google.png"></a></li>
+      <li><a href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fbookshelf.com&title=&summary=&source=http%3A%2F%2Fbookshelf.com" target="_blank" title="Share on LinkedIn"><img alt="Share on LinkedIn" src="assets/img/flat_web_icon_set/black/LinkedIn.png"></a></li>
+      <li><a href="mailto:?subject=&body=:%20http%3A%2F%2Fbookshelf.com" target="_blank" title="Send email"><img alt="Send email" src="assets/img/flat_web_icon_set/black/Email.png"></a></li>
+    </ul>
+  </div>
+</div>
+<div class="row book-block">
+  <div class="col-md-6 col-lg-4 wow fadeInLeft" data-wow-duration="" data-wow-delay="0.0s">
+    <img src="uploads/book/{{vm.book.cover}}" style="width: 100%">
+  </div>
+
+  <div class="col-md-6 col-lg-8 wow fadeInRight" data-wow-duration="" data-wow-delay="0.3s">
+    <p class="txt5">{{vm.book.title}}</p>
+    <p class="txt6">by {{vm.book.author}}</p>
+    <p class="txt-desc" ng-bind-html="vm.book.summary"></p>
+    <div class="actions txt_cntr">
+      <a class="more_btn btn btn-primary btn-buy" href="{{::vm.book.amazon || 'http://www.amazon.com'}}">
+        <img src="assets/img/amazon.png"> Buy this book
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="hline v3"></div>
+<h2 class="txt_cntr marTop3">READERS</h2>
+<div class="container">
+  <div class="row txt_cntr">
+    <div class="col-sm-6 col-md-3" ng-repeat="person in vm.book.readers">
+      <div class="person-wrapper">
+        <img src="uploads/celebrity/{{person.photo}}" alt="">
+        <h3><a ui-sref="main.celebrity({celebrity_id: person.id})">{{person.name}}</a></h3>
+      </div>
+    </div>
+  </div>
+</div>

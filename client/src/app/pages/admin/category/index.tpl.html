@@ -1,0 +1,38 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="header">
+          <h4 class="title">Celebrity categories <button class="btn btn-success pull-right btn-fill" ng-click="vm.actions.create()">Add New</button></h4>
+          <p class="category">
+            Manage categories
+          </p>
+        </div>
+        <div class="content table-responsive table-full-width">
+          <table st-table="vm.displayed" class="table table-hover table-striped" st-safe-src="vm.arr_categories">
+            <thead>
+              <tr>
+                <th st-sort="title">category</th>
+                <th>ops</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="category in vm.displayed" ng-if="category.id">
+                <td>
+                  <a href="#" editable-text="category.title" e-required onbeforesave="vm.onUpdateCategoryAttr(category, 'title', $data)">
+                    {{category.title}}
+                  </a>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-default" ng-click="vm.actions.remove(category)">
+                    <i class="fa fa-close"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

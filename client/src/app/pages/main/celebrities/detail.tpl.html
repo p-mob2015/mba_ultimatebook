@@ -1,0 +1,49 @@
+<div class="row topping" ng-cloak>
+  <div class="col-md-6">
+    <div class="breadcrumber">
+      <a class="link-main txt1" ui-sref="main.celebrities({category_id: category.id})" ng-repeat="category in vm.person.categories">{{category.title}}</a>
+    </div>
+  </div>
+  <div class="col-md-6 txt_right">
+    <ul class="share-buttons">
+      <li><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fbookshelf.com&t=" title="Share on Facebook" target="_blank"><img alt="Share on Facebook" src="assets/img/flat_web_icon_set/black/Facebook.png"></a></li>
+      <li><a href="https://twitter.com/intent/tweet?source=http%3A%2F%2Fbookshelf.com&text=:%20http%3A%2F%2Fbookshelf.com" target="_blank" title="Tweet"><img alt="Tweet" src="assets/img/flat_web_icon_set/black/Twitter.png"></a></li>
+      <li><a href="https://plus.google.com/share?url=http%3A%2F%2Fbookshelf.com" target="_blank" title="Share on Google+"><img alt="Share on Google+" src="assets/img/flat_web_icon_set/black/Google.png"></a></li>
+      <li><a href="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Fbookshelf.com&title=&summary=&source=http%3A%2F%2Fbookshelf.com" target="_blank" title="Share on LinkedIn"><img alt="Share on LinkedIn" src="assets/img/flat_web_icon_set/black/LinkedIn.png"></a></li>
+      <li><a href="mailto:?subject=&body=:%20http%3A%2F%2Fbookshelf.com" target="_blank" title="Send email"><img alt="Send email" src="assets/img/flat_web_icon_set/black/Email.png"></a></li>
+    </ul>
+  </div>
+</div>
+
+<div class="row book-block">
+  <div class="col-md-4 col-lg-3 wow fadeInLeft" data-wow-duration="" data-wow-delay="0.0s">
+    <img src="uploads/celebrity/{{vm.person.photo}}" style="width: 100%">
+  </div>
+
+  <div class="col-md-8 col-lg-9 wow fadeInRight" data-wow-duration="" data-wow-delay="0.3s">
+    <p class="txt5">{{vm.person.name}}</p>
+    <p class="txt-desc" ng-bind-html="vm.person.bio"></p>
+    <div class="actions txt_cntr">
+      <a class="more_btn btn btn-primary">
+        Follow This Person
+      </a>
+      <a class="more_btn">
+        Suggest Profile Edit
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="hline v3"></div>
+<h2 class="txt_cntr marTop3">BOOKS READ BY THIS PERSON</h2>
+<div class="container">
+  <div class="row txt_cntr">
+    <div class="col-sm-6 col-md-3" ng-repeat="book in vm.person.books">
+      <div class="book-wrapper">
+        <a ui-sref="main.book({book_id: book.id})">
+          <img src="uploads/book/{{book.cover}}">
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

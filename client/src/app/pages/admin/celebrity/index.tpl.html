@@ -1,0 +1,61 @@
+<div ui-view></div>
+<div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Celebrities <button class="btn btn-success btn-fill pull-right" ng-click="vm.actions.create()">Add New</button></h4>
+                                <p class="category">
+                                  Manage celebrities
+                                </p>
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                <table st-table="vm.displayed" class="table table-hover table-striped" st-safe-src="vm.arr_celebrities">
+                                  <thead>
+                                    <tr>
+                                      <th st-sort="name">name</th>
+                                      <th>bio</th>
+                                      <th width="250px">ops</th>
+                                    </tr>
+                                    <!-- <tr>
+                                      <th>
+                                        <input st-search="name" class="form-control" type="search"/>
+                                      </th>
+                                      <th></th>
+                                      <th></th>
+                                    </tr> -->
+                                  </thead>
+                                  <tbody>
+                                    <tr ng-repeat="person in vm.displayed" ng-if="person.id">
+                                      <td>
+                                        {{person.name}}
+                                      </td>
+                                      <td>
+                                        <div class="truncate">{{person.bio}}</div>
+                                      </td>
+                                      <td>
+                                        <button type="button" class="btn btn-primary" ng-click="vm.actions.edit(person)">
+                                          <i class="fa fa-pencil"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-primary" ng-click="vm.actions.booklist(person)">
+                                          Books
+                                        </button>
+                                        <button type="button" class="btn btn-default" ng-click="vm.actions.remove(person)">
+                                          <i class="fa fa-close"></i>
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                  <tfoot>
+                                    <tr>
+                                      <td class="text-center" colspan="2">
+                                        <div st-pagination="" st-items-by-page="10" st-displayed-pages="10"></div>
+                                      </td>
+                                    </tr>
+                                  </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>

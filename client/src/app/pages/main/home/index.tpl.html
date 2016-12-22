@@ -1,0 +1,46 @@
+      <h2 class="txt_cntr marTop1">FAMOUS BOOK WORMS</h2>
+      <div class="container">
+        <div class="row txt_cntr">
+          <div class="col-sm-6 col-md-3" ng-repeat="person in vm.arr_top_readers">
+            <div class="person-wrapper">
+              <img src="uploads/celebrity/{{person.photo}}" alt="">
+              <h3><a ui-sref="main.celebrity({celebrity_id: person.id})">{{person.name}}</a></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hline v7"></div>
+      <h2 class="txt_cntr marTop2">MOST POPULAR BOOKS</h2>
+      <div class="container">
+        <div class="row txt_cntr">
+          <div class="col-sm-6 col-md-3" ng-repeat="book in vm.arr_top_books">
+            <div class="book-wrapper">
+              <a ui-sref="main.book({book_id: book.id})">
+                <img src="uploads/book/{{book.cover}}">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="marTop2">
+        <div class="box-2 v2 wow fadeInUp">
+          <h2 class="txt_cntr marTop7 color1">Browse By Book Categories</h2>        
+            <div class="row">
+              <div class="col-sm-4 col-md-3 col-lg-2" ng-repeat="genre in vm.arr_genres">
+                <div class="category-wrapper txt_cntr">
+                  <p class="txt6"><a ui-sref="main.books({genre_id: genre.id})" class="link3">{{genre.title}}</a></p>
+                </div>
+              </div>
+            </div>
+          <h2 class="txt_cntr marTopBig color1">Browse By people Categories</h2>        
+            <div class="row">
+              <div class="col-sm-4 col-md-3 col-lg-2" ng-repeat="category in vm.arr_categories">
+                <div class="category-wrapper txt_cntr">
+                  <p class="txt6"><a ui-sref="main.celebrities({category_id: category.id})" class="link3">{{category.title}}</a></p>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>

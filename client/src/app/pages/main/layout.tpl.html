@@ -1,0 +1,80 @@
+<!--========================================================
+                          HEADER 
+=========================================================-->
+<header id="header">
+  <div id="stuck_container">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="txt_cntr">
+          <h1><a ui-sref=".home" ui-sref-opts="{reload: true}"><img src="assets/img/logo.png" alt="booklife"></a> </h1>
+        </div>
+        <div>
+          <nav>
+            <ul class="sf-menu">
+              <li ui-sref-active="current"><a ui-sref=".home" ui-sref-opts="{reload: true}">Home<strong></strong></a></li>
+              <li ui-sref-active="current"><a ui-sref="main.books({genre_id: null})" ui-sref-opts="{reload: true}">Books<strong></strong></a></li>
+              <li ui-sref-active="current"><a ui-sref="main.celebrities({category_id: null})" ui-sref-opts="{reload: true}">Celebrities<strong></strong></a></li>
+              <li ui-sref-active="current" id="last-li"><a ui-sref=".about" ui-sref-opts="{reload: true}">Contacts<strong></strong></a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!--========================================================
+                          CONTENT 
+=========================================================-->
+<section id="content">
+  <div class="container-fluid" ui-view></div>
+</section>
+<!--========================================================
+                          FOOTER 
+=========================================================-->
+<footer id="footer" ng-init="vm.initStickMenu()">
+  <div class="container-fluid">
+    <div class="hline v2"></div>
+    <div class="row">
+      <div class="col-sm-12">
+
+        <h1><a href="index.html">Booklife</a> </h1>
+        <p class="txt_priv wow fadeInLeft">&copy; <span id="copyright-year"></span>. <a href="index-7.html">Privacy Policy</a></p>
+
+        <ul class="soc_icons2 wow fadeInRight">
+          <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+          <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+          <li><a href="#"><i class="fa fa-rss"></i></a></li>
+          <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+          <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- 
+<div class="top_section">
+  <div class="container">
+    <div class="row">
+      <div class="grid_5">
+        <p class="txt1 marLeft1"><img src="images/icon1.png" alt="" class="img1 no_resize">9870 St Vincent Place, Glasgow, DC 45 Fr 45.</p>
+      </div>
+      <div class="grid_2">
+        <p class="txt1 marLeft2"><img src="images/icon2.png" alt="" class="img1 no_resize"><a href="#" class="link">contact@booklife.org</a></p>
+      </div>
+      <div class="grid_2">
+        <p class="txt1"><img src="images/icon3.png" alt="" class="img1 no_resize"> +1 800 559 12121</p>
+      </div>
+      <div class="grid_3">
+        <ul class="soc_icons">
+          <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+          <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+          <li><a href="#"><i class="fa fa-rss"></i></a></li>
+          <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+          <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- <script type="javsrc="assets/javascript/template/script.js"></script> -->
+<script src="assets/javascript/template/tmstickup.js"></script>

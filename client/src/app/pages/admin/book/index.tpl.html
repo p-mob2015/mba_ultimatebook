@@ -1,0 +1,74 @@
+<div ui-view></div>
+<div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Books <button class="btn btn-success btn-fill pull-right" ng-click="vm.actions.create()">Add New</button></h4>
+                                <p class="category">
+                                  Manage books
+                                </p>
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                <table st-table="vm.displayed" class="table table-hover table-striped" st-safe-src="vm.arr_books">
+                                  <thead>
+                                    <tr>
+                                      <th st-sort="isbn">isbn</th>
+                                      <th st-sort="name">title</th>
+                                      <th st-sort="author">author</th>
+                                      <th st-sort="summary">summary</th>
+                                      <th width="150px">ops</th>
+                                    </tr>
+                                    <tr>
+                                      <th>
+                                        <input st-search="isbn" class="form-control" type="search"/>
+                                      </th>
+                                      <th>
+                                        <input st-search="name" class="form-control" type="search"/>
+                                      </th>
+                                      <th>
+                                        <input st-search="author" class="form-control" type="search"/>
+                                      </th>
+                                      <th>
+                                        <input st-search="summary" class="form-control" type="search"/>
+                                      </th>
+                                      <th></th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr ng-repeat="book in vm.displayed" ng-if="book.id">
+                                      <td>
+                                        {{book.isbn || '-'}}
+                                      </td>
+                                      <td>
+                                        {{book.title}}
+                                      </td>
+                                      <td>
+                                        {{book.author}}
+                                      </td>
+                                      <td>
+                                        <div class="truncate">{{book.summary}}</div>
+                                      </td>
+                                      <td>
+                                        <button type="button" class="btn btn-primary" ng-click="vm.actions.edit(book)">
+                                          <i class="fa fa-pencil"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-default" ng-click="vm.actions.remove(book)">
+                                          <i class="fa fa-close"></i>
+                                        </button>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                  <tfoot>
+                                    <tr>
+                                      <td class="text-center" colspan="2">
+                                        <div st-pagination="" st-items-by-page="10" st-displayed-pages="10"></div>
+                                      </td>
+                                    </tr>
+                                  </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>

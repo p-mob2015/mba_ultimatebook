@@ -1,0 +1,38 @@
+<div class="container-fluid" ng-cloak>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="header">
+          <h4 class="title">
+            {{::vm.ui.title}}
+            <button type="button" class="btn btn-default btn-fill pull-right" ng-click="vm.onCancel()">Cancel</button>
+            <button type="button" class="btn btn-primary btn-fill pull-right" ng-click="vm.onSubmit()" style="margin-right: 5px">Save</button>            
+          </h4>
+          <p class="category">
+            Use drag-n-drop interface to manage the reading list
+          </p>
+        </div>
+        <div class="content">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="shelf-panel" data-jqyoui-options="{containment: 'window'}" data-drop="true" ng-model="vm.ui.pool_shelf" jqyoui-droppable="{multiple:true}">
+                <h6>Reading List</h6>
+                <div class="btn btn-warning btn-fill btn-draggable _mb-1 _mr-1" data-drag="true" data-jqyoui-options jqyoui-draggable="{index: {{$index}},animate:true}" ng-model="vm.ui.pool_shelf" ng-repeat="book in vm.ui.pool_shelf">{{book.title}}</div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="shelf-panel" data-jqyoui-options="{containment: 'window'}" data-drop="true" ng-model="vm.ui.pool_library" jqyoui-droppable="{multiple:true}">
+                <h6>
+                  Available Books
+                  <input type="text" placeholder="search" ng-model="vm.ui.search" class="form-control input-md pull-right search-book">
+                  <a ng-click="vm.ui.search=''" href="" class="search-clear"><i class="fa fa-close"></i></a>
+                </h6>
+                <div class="btn btn-warning btn-draggable _mb-1 _mr-1" data-drag="true" data-jqyoui-options jqyoui-draggable="{index: {{$index}},animate:true}" ng-model="vm.ui.pool_library" ng-repeat="book in vm.ui.pool_library" ng-show="vm.ui.filtered(book.title, vm.ui.search)">{{book.title}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

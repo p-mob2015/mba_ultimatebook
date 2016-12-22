@@ -1,0 +1,38 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="header">
+          <h4 class="title">Book genres <button class="btn btn-success pull-right btn-fill" ng-click="vm.actions.create()">Add New</button></h4>
+          <p class="category">
+            Manage genres
+          </p>
+        </div>
+        <div class="content table-responsive table-full-width">
+          <table st-table="vm.displayed" class="table table-hover table-striped" st-safe-src="vm.arr_genres">
+            <thead>
+              <tr>
+                <th st-sort="title">genre</th>
+                <th>ops</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="genre in vm.displayed" ng-if="genre.id">
+                <td>
+                  <a href="#" editable-text="genre.title" e-required onbeforesave="vm.onUpdateGenreAttr(genre, 'title', $data)">
+                    {{genre.title}}
+                  </a>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-default" ng-click="vm.actions.remove(genre)">
+                    <i class="fa fa-close"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
