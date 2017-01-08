@@ -3,6 +3,21 @@ angular
   .service('CelebrityStore', function(CelebrityConnector, $injector, Helper){
     this.arr_celebrities = [];
     this.sync = false;
+    this.loading_callbacks = [];
+
+    this.registerLoadingCallbacks = function(st_callback, en_callback){
+      this.loading_callbacks[0] = st_callback;
+      this.loading_callbacks[1] = en_callback;
+    }
+    this.triggerLoadingCallback = function(starting, skip){
+      if (skip) return;
+      if (this.loading_callbacks.length == 0) return;
+      
+      if (starting)
+        this.loading_callbacks[0]();
+      else
+        this.loading_callbacks[1]();
+    }
 
     this.purge = function(){
       this.sync = false;
@@ -76,16 +91,18 @@ angular
       }
     }
 
-    this._loadCelebrities = function(loader){
+    this._loadCelebrities = function(loader, skip_loading_callback){
       var _this = this;
       if (_this.getSync())
         loader.finishLoading(true);
       else{
+        _this.triggerLoadingCallback(true, skip_loading_callback);
         CelebrityConnector.query({}, function(arr_celebs){
           for (var i=0; i<arr_celebs.length; i++){
             _this.pushCelebrity(arr_celebs[i]);
           }
           _this.setSync();
+          _this.triggerLoadingCallback(false, skip_loading_callback);
           loader.finishLoading(true);
         }, function(){
           // API fail...
@@ -98,8 +115,10 @@ angular
       var _this = this;
       var post_data = celeb_obj; //_this.getPostVersion(celeb_obj);
 
+      _this.triggerLoadingCallback(true);
       CelebrityConnector.save(post_data, function(result_obj){
         _this.pushCelebrity(result_obj);
+        _this.triggerLoadingCallback(false);
         callback(true);
       }, function(){
         callback(false);
@@ -123,11 +142,12 @@ angular
         celeb_connector[key] = celeb_obj_clone[key];
       }
 
+      _this.triggerLoadingCallback(true);
       celeb_connector.$update({}, function(result_obj){
         for (var key in celeb_obj_clone){
           celeb_obj_origin[key] = celeb_obj_clone[key];
         }
-
+        _this.triggerLoadingCallback(false);
         callback(true);
       }, function(){
         callback(false);
@@ -136,8 +156,11 @@ angular
 
     this._removeCelebrity = function(celeb_id, callback){
       var _this = this;
+
+      _this.triggerLoadingCallback(true);
       CelebrityConnector.remove({celeb_id: celeb_id}, function(result){
         _this.removeCelebrity(celeb_id);
+        _this.triggerLoadingCallback(false);
         callback(true);
       }, function(){
         callback(false);

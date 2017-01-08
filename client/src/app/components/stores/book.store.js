@@ -1,8 +1,23 @@
 angular
   .module('mba')
   .service('BookStore', function(BookConnector, $injector, Helper){
-    this.arr_books = [];
+    this.arr_books = [];    
     this.sync = false;
+    this.loading_callbacks = [];
+
+    this.registerLoadingCallbacks = function(st_callback, en_callback){
+      this.loading_callbacks[0] = st_callback;
+      this.loading_callbacks[1] = en_callback;
+    }
+    this.triggerLoadingCallback = function(starting, skip){
+      if (skip) return;
+      if (this.loading_callbacks.length == 0) return;
+
+      if (starting)
+        this.loading_callbacks[0]();
+      else
+        this.loading_callbacks[1]();
+    }
 
     this.purge = function(){
       this.sync = false;
@@ -68,7 +83,7 @@ angular
         
       }
     }
-    this.dimissGenre = function(genre_id){
+    this.dismissGenre = function(genre_id){
       for (var key in this.arr_books){
         var tmpIndex = this.arr_books[key].genre_ids.indexOf(genre_id);
         if (tmpIndex != -1)
@@ -76,16 +91,18 @@ angular
       }
     }
 
-    this._loadBooks = function(loader){
+    this._loadBooks = function(loader, skip_loading_callback){
       var _this = this;
       if (_this.getSync())
         loader.finishLoading(true);
       else{
+        _this.triggerLoadingCallback(true, skip_loading_callback);
         BookConnector.query({}, function(arr_books){
           for (var i=0; i<arr_books.length; i++){
             _this.pushBook(arr_books[i]);
           }
           _this.setSync();
+          _this.triggerLoadingCallback(false, skip_loading_callback);
           loader.finishLoading(true);
         }, function(){
           // API fail...
@@ -98,8 +115,10 @@ angular
       var _this = this;
       var post_data = book_obj; //_this.getPostVersion(book_obj);
 
+      _this.triggerLoadingCallback(true);
       BookConnector.save(post_data, function(result_obj){
         _this.pushBook(result_obj);
+        _this.triggerLoadingCallback(false);
         callback(true);
       }, function(){
         callback(false);
@@ -123,11 +142,13 @@ angular
         book_connector[key] = book_obj_clone[key];
       }
 
+      _this.triggerLoadingCallback(true);
       book_connector.$update({}, function(result_obj){
         for (var key in book_obj_clone){
           book_obj_origin[key] = book_obj_clone[key];
         }
 
+        _this.triggerLoadingCallback(false);
         callback(true);
       }, function(){
         callback(false);
@@ -136,8 +157,11 @@ angular
 
     this._removeBook = function(book_id, callback){
       var _this = this;
+
+      _this.triggerLoadingCallback(true);
       BookConnector.remove({book_id: book_id}, function(result){
         _this.removeBook(book_id);
+        _this.triggerLoadingCallback(false);
         callback(true);
       }, function(){
         callback(false);

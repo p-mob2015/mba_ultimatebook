@@ -21,7 +21,9 @@ angular
         });
 
         modalInstance.result.then(function(genre){
+          $rootScope._loading = true;
           GenreStore._addGenre(genre, function(success){
+            $rootScope._loading = false;
             if (!success){
               console.log("Creating genre failed...");
             }
@@ -52,9 +54,7 @@ angular
     }
 
     function removeGenre(genre){
-      $rootScope._loading = true;
       GenreStore._removeGenre(genre.id, function(success){
-        $rootScope._loading = false;
         if (!success){
           console.log("Removing genre failed...");
         }

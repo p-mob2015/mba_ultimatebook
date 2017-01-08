@@ -14,7 +14,7 @@ angular
       if (remaining == 1)
         BookStore._loadBooks(loader);
     }).startLoading(function(loader){
-      GenreStore._loadGenres(loader);
+      GenreStore._loadGenres(loader, true);
     });
 
     vm.actions = {

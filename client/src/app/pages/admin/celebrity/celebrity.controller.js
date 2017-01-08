@@ -14,7 +14,7 @@ angular
       if (remaining == 1)
         CelebrityStore._loadCelebrities(loader);
     }).startLoading(function(loader){
-      CategoryStore._loadCategories(loader);
+      CategoryStore._loadCategories(loader, true);
     });
 
     vm.actions = {

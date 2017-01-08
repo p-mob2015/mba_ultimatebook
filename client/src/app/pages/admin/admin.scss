@@ -6,6 +6,17 @@
     text-overflow: ellipsis;
   }
 
+  .loader {
+    position:fixed; 
+    width:100%; 
+    height:100%; background: rgba(151,115,217, 0.3); z-index: 10;
+
+    img {
+      -webkit-filter: invert(60%); /* Safari */
+      filter: invert(60%);
+    }
+  }
+
   ._mt-1 {
     margin-top: 5px;
   }

@@ -3,6 +3,21 @@ angular
   .service('CategoryStore', function(CategoryConnector, CelebrityStore){
     this.arr_categories = [];
     this.sync = false;
+    this.loading_callbacks = [];
+
+    this.registerLoadingCallbacks = function(st_callback, en_callback){
+      this.loading_callbacks[0] = st_callback;
+      this.loading_callbacks[1] = en_callback;
+    }
+    this.triggerLoadingCallback = function(starting, skip){
+      if (skip) return;
+      if (this.loading_callbacks.length == 0) return;
+      
+      if (starting)
+        this.loading_callbacks[0]();
+      else
+        this.loading_callbacks[1]();
+    }
 
     this.purge = function(){
       this.sync = false;
@@ -42,16 +57,18 @@ angular
       }
     }
 
-    this._loadCategories = function(loader){
+    this._loadCategories = function(loader, skip_loading_callback){
       var _this = this;
       if (_this.getSync())
         loader.finishLoading(true);
       else{
+        _this.triggerLoadingCallback(true, skip_loading_callback);
         CategoryConnector.query({}, function(arr_categories){
           for (var i=0; i<arr_categories.length; i++){
             _this.pushCategory(arr_categories[i]);
           }
           _this.setSync();
+          _this.triggerLoadingCallback(false, skip_loading_callback);
           loader.finishLoading(true);
         }, function(){
           // API fail...
@@ -64,8 +81,10 @@ angular
       var _this = this;
       var post_data = category_obj; //_this.getPostVersion(celeb_obj);
 
+      _this.triggerLoadingCallback(true);
       CategoryConnector.save(post_data, function(result_obj){
         _this.pushCategory(result_obj);
+        _this.triggerLoadingCallback(false);
         callback(true);
       }, function(){
         callback(false);
@@ -89,11 +108,12 @@ angular
         category_connector[key] = category_obj_clone[key];
       }
 
+      _this.triggerLoadingCallback(true);
       category_connector.$update({}, function(result_obj){
         for (var key in category_obj_clone){
           category_obj_origin[key] = category_obj_clone[key];
         }
-
+        _this.triggerLoadingCallback(false);
         callback(true);
       }, function(){
         callback(false);
@@ -102,8 +122,11 @@ angular
 
     this._removeCategory = function(category_id, callback){
       var _this = this;
+
+      _this.triggerLoadingCallback(true);
       CategoryConnector.remove({category_id: category_id}, function(result){
         _this.removeCategory(category_id);
+        _this.triggerLoadingCallback(false);
         callback(true);
       }, function(){
         callback(false);
