@@ -15,10 +15,14 @@
               <li ui-sref-active="current"><a ui-sref="main.books({genre_id: null})" ui-sref-opts="{reload: true}">Books<strong></strong></a></li>
               <li ui-sref-active="current"><a ui-sref="main.celebrities({category_id: null})" ui-sref-opts="{reload: true}">Celebrities<strong></strong></a></li>
               <li ui-sref-active="current" id="last-li"><a ui-sref=".about" ui-sref-opts="{reload: true}">Contacts<strong></strong></a></li>
+              <li><a href="" ng-click="vm.toggleSearch()"><i class="fa fa-search"></i></a></li>
             </ul>
+            <div ng-include="'app/pages/main/search/search_bar.tpl.html'" ng-show="vm.showSearchBar"></div>
           </nav>
         </div>
       </div>
+
+      
     </div>
   </div>
 </header>

@@ -55,6 +55,23 @@ angular
         return (book.genre_ids.indexOf(genre_id) != -1);
       });
     }
+    this.searchBy = function(keyword){
+      return _.filter(this.arr_books, function(book){
+        var book_obj_full = Helper.getClone(book);
+        book_obj_full.genres = [];
+        for (var key in book_obj_full.genre_ids){
+          book_obj_full.genres.push($injector.get('GenreStore').getGenreById(book_obj_full.genre_ids[key]));
+        }
+
+        var title_test = book_obj_full.title.toLowerCase().includes(keyword);
+        var genre_test = _.map(book_obj_full.genres, function(c){
+          return c.title;
+        }).join('|').toLowerCase().includes(keyword);
+        var author_test = book_obj_full.author.toLowerCase().includes(keyword);
+
+        return title_test || genre_test || author_test;
+      });
+    }
     this.getBookById = function(book_id, populate){
       var book_index = _.findIndex(this.arr_books, {
         id: book_id

@@ -55,7 +55,24 @@ angular
         return (person.category_ids.indexOf(category_id) != -1);
       });
     }
+    this.searchBy = function(keyword){
+      return _.filter(this.arr_celebrities, function(person){
+        var person_obj_full = Helper.getClone(person);
+        person_obj_full.categories = [];
+        person_obj_full.books = [];
 
+        for (var key in person_obj_full.category_ids){
+          person_obj_full.categories.push($injector.get('CategoryStore').getCategoryById(person_obj_full.category_ids[key]));
+        }
+
+        var name_test = person_obj_full.name.toLowerCase().includes(keyword);
+        var category_test = _.map(person_obj_full.categories, function(c){
+          return c.title;
+        }).join('|').toLowerCase().includes(keyword);
+
+        return name_test || category_test;
+      });
+    }
     this.getCelebrityById = function(celeb_id, populate){
       var celeb_index = _.findIndex(this.arr_celebrities, {
         id: celeb_id

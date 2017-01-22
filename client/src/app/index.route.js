@@ -93,6 +93,12 @@
         controller: 'MainHomeController',
         controllerAs: 'vm'
       })
+      .state('main.search', {
+        url: '/search/:keyword',
+        templateUrl: 'app/pages/main/search/index.tpl.html',
+        controller: 'MainSearchController',
+        controllerAs: 'vm'
+      })
       .state('main.books', {
         url: '/books/:genre_id',
         templateUrl: 'app/pages/main/books/index.tpl.html',
