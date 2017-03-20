@@ -37,7 +37,9 @@
   <div class="row txt_cntr">
     <div class="col-sm-6 col-md-3" ng-repeat="person in vm.book.readers">
       <div class="person-wrapper">
-        <img src="uploads/celebrity/{{person.photo}}" alt="">
+        <a ui-sref="main.celebrity({celebrity_id: person.id})">
+          <img src="uploads/celebrity/{{person.photo}}" alt="">
+        </a>
         <h3><a ui-sref="main.celebrity({celebrity_id: person.id})">{{person.name}}</a></h3>
       </div>
     </div>

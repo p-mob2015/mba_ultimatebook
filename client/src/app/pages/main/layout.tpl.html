@@ -6,7 +6,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="txt_cntr">
-          <h1><a ui-sref=".home" ui-sref-opts="{reload: true}"><img src="assets/img/logo.png" alt="booklife"></a> </h1>
+          <h1><a ui-sref=".home" ui-sref-opts="{reload: true}"><img id="logo" src="assets/img/logo.png" alt="ultimatebooklist"></a> </h1>
         </div>
         <div>
           <nav>
@@ -14,15 +14,13 @@
               <li ui-sref-active="current"><a ui-sref=".home" ui-sref-opts="{reload: true}">Home<strong></strong></a></li>
               <li ui-sref-active="current"><a ui-sref="main.books({genre_id: null})" ui-sref-opts="{reload: true}">Books<strong></strong></a></li>
               <li ui-sref-active="current"><a ui-sref="main.celebrities({category_id: null})" ui-sref-opts="{reload: true}">Celebrities<strong></strong></a></li>
-              <li ui-sref-active="current" id="last-li"><a ui-sref=".about" ui-sref-opts="{reload: true}">Contacts<strong></strong></a></li>
+              <li ui-sref-active="current" id="last-li"><a ui-sref=".about" ui-sref-opts="{reload: true}">About<strong></strong></a></li>
               <li><a href="" ng-click="vm.toggleSearch()"><i class="fa fa-search"></i></a></li>
             </ul>
             <div ng-include="'app/pages/main/search/search_bar.tpl.html'" ng-show="vm.showSearchBar"></div>
           </nav>
         </div>
       </div>
-
-      
     </div>
   </div>
 </header>
@@ -41,7 +39,7 @@
     <div class="row">
       <div class="col-sm-12">
 
-        <h1><a href="index.html">Booklife</a> </h1>
+        <h1><a href="index.html">Ultimatebooklist</a> </h1>
         <p class="txt_priv wow fadeInLeft">&copy; <span id="copyright-year"></span>. <a href="index-7.html">Privacy Policy</a></p>
 
         <ul class="soc_icons2 wow fadeInRight">

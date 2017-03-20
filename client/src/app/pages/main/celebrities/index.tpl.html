@@ -1,9 +1,9 @@
-<div class="box-2 v2 wow fadeInUp" ng-hide="::vm.category_id">
-  <h2 class="txt_cntr marTop7 color1">Browse By People Categories</h2>        
+<div class="wow fadeInUp container" ng-hide="::vm.category_id">
+  <h3 class="txt_cntr marTop7">Browse By People Categories</h3>
   <div class="row">
     <div class="col-sm-4 col-md-3 col-lg-2" ng-repeat="category in vm.arr_categories">
       <div class="category-wrapper txt_cntr">
-        <p class="txt6"><a ui-sref="main.celebrities({category_id: category.id})" class="link3">{{category.title}}</a></p>
+        <p class="txt6"><a ui-sref="main.celebrities({category_id: category.id})" class="link2">{{category.title}}</a></p>
       </div>
     </div>
   </div>
@@ -17,7 +17,9 @@
   <div class="row txt_cntr">
     <div class="col-sm-6 col-md-3" ng-repeat="person in vm.arr_people">
       <div class="person-wrapper">
-        <img src="uploads/celebrity/{{person.photo}}" alt="">
+        <a ui-sref="main.celebrity({celebrity_id: person.id})">
+          <img src="uploads/celebrity/{{person.photo}}" alt="">
+        </a>
         <h3><a ui-sref="main.celebrity({celebrity_id: person.id})">{{person.name}}</a></h3>
       </div>
     </div>
