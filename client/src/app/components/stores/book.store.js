@@ -63,13 +63,13 @@ angular
           book_obj_full.genres.push($injector.get('GenreStore').getGenreById(book_obj_full.genre_ids[key]));
         }
 
-        var title_test = book_obj_full.title.toLowerCase().includes(keyword);
+        var title_test = book_obj_full.title.toLowerCase().indexOf(keyword);
         var genre_test = _.map(book_obj_full.genres, function(c){
           return c.title;
-        }).join('|').toLowerCase().includes(keyword);
-        var author_test = book_obj_full.author.toLowerCase().includes(keyword);
+        }).join('|').toLowerCase().indexOf(keyword);
+        var author_test = book_obj_full.author.toLowerCase().indexOf(keyword);
 
-        return title_test || genre_test || author_test;
+        return (title_test != -1) || (genre_test != -1) || (author_test != -1);
       });
     }
     this.getBookById = function(book_id, populate){

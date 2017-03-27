@@ -1,6 +1,6 @@
 @import url(//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
-@import url(//fonts.googleapis.com/css?family=Ubuntu);
-@import url(//fonts.googleapis.com/css?family=Rokkitt:400,700);
+/*@import url(//fonts.googleapis.com/css?family=Ubuntu);*/
+/*@import url(//fonts.googleapis.com/css?family=Rokkitt:400,700);*/
 /*Rokkitt*/
 /*========================================================
 										Main variables
@@ -99,10 +99,11 @@ h5 {
 										menu variables
 =========================================================*/
 nav {
-  margin-top: 54px;
-  text-align: center;
-  padding-bottom: 16px;
   border-bottom: 1px solid #c6c6c6;
+  margin-top: 10px;
+  padding-bottom: 16px;
+  padding-top: 16px;
+  text-align: center;
 }
 .sf-menu {
   display: inline-block;

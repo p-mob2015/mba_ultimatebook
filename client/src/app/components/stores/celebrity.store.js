@@ -65,12 +65,12 @@ angular
           person_obj_full.categories.push($injector.get('CategoryStore').getCategoryById(person_obj_full.category_ids[key]));
         }
 
-        var name_test = person_obj_full.name.toLowerCase().includes(keyword);
+        var name_test = person_obj_full.name.toLowerCase().indexOf(keyword);
         var category_test = _.map(person_obj_full.categories, function(c){
           return c.title;
-        }).join('|').toLowerCase().includes(keyword);
+        }).join('|').toLowerCase().indexOf(keyword);
 
-        return name_test || category_test;
+        return (name_test != -1) || (category_test != -1);
       });
     }
     this.getCelebrityById = function(celeb_id, populate){
